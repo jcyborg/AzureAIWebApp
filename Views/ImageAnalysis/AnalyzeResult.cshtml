@@ -1,0 +1,96 @@
+﻿@model ImageAnalyzer.ViewModel.AnalysisResultViewModel
+
+@{
+    ViewData["Title"] = "Analyze Result";
+}
+
+<h2>Analyze Result</h2>
+
+@if (!string.IsNullOrEmpty(Model.AnnotatedImagePath))
+{
+    <div class="image-container">
+        <img src="@Url.Content("~/outputFolder/" + System.IO.Path.GetFileName(Model.AnnotatedImagePath))" alt="Annotated Image" class="responsive-image" />
+    </div>
+}
+else
+{
+    <p>No image to display.</p>
+}
+
+@if (!string.IsNullOrEmpty(Model.Caption))
+{
+    <h3>Caption</h3>
+    <p>@Model.Caption</p>
+}
+
+@if (Model.DenseCaptions != null && Model.DenseCaptions.Any())
+{
+    <h3>Dense Captions</h3>
+    <ul>
+        @foreach (var denseCaption in Model.DenseCaptions)
+        {
+            <li>@denseCaption</li>
+        }
+    </ul>
+}
+
+@if (Model.Tags != null && Model.Tags.Any())
+{
+    <h3>Tags</h3>
+    <ul>
+        @foreach (var tag in Model.Tags)
+        {
+            <li>@tag</li>
+        }
+    </ul>
+}
+
+@if (Model.Objects != null && Model.Objects.Any())
+{
+    <h3>Objects</h3>
+    <ul>
+        @foreach (var obj in Model.Objects)
+        {
+            <li>@obj</li>
+        }
+    </ul>
+}
+
+@if (Model.People != null && Model.People.Any())
+{
+    <h3>People</h3>
+    <ul>
+        @foreach (var person in Model.People)
+        {
+            <li>@person</li>
+        }
+    </ul>
+}
+
+<!-- Add CSS for responsiveness -->
+<style>
+    .image-container {
+        text-align: center;
+    }
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+    }
+    h2, h3 {
+        text-align: center;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    ul li {
+        background: #f2f2f2;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    p, ul {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+</style>

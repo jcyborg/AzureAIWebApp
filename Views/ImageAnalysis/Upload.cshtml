@@ -1,0 +1,92 @@
+﻿@model ImageAnalyzer.Models.ImageModel
+
+@{
+    ViewData["Title"] = "Upload Image";
+}
+
+<h2>Upload Image</h2>
+
+<form asp-action="Analyze" method="post" enctype="multipart/form-data" class="upload-form">
+    <div class="form-group">
+        <label asp-for="ImageFile" class="control-label"></label>
+        <input asp-for="ImageFile" class="form-control" type="file" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+    <div class="form-group button-group">
+        <button type="submit" formaction="/ImageAnalysis/Analyze" class="btn btn-primary">Analyze Image</button>
+        <button type="submit" formaction="/ImageAnalysis/RemoveBackground" class="btn btn-secondary">Remove Background</button>
+    </div>
+</form>
+
+<!-- Add CSS for responsiveness -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+    .upload-form {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .btn:last-child {
+        margin-right: 0;
+    }
+    .btn-primary {
+        background-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+   /*  media (max-width: 768px) {
+        .upload-form {
+            padding: 10px;
+        }
+        .btn {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .button-group {
+            flex-direction: column;
+        }
+        .btn:last-child {
+            margin-right: 0;
+        }
+    } */
+</style>

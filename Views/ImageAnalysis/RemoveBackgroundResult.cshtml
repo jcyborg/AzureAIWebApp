@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Background Removed Result";
+    var backgroundRemovedImagePath = ViewData["BackgroundRemovedImagePath"] as string;
+}
+
+<h2>Background Removed Result</h2>
+
+@if (!string.IsNullOrEmpty(backgroundRemovedImagePath))
+{
+    <div class="image-container">
+        <img src="@Url.Content("~/outputFolder/" + System.IO.Path.GetFileName(backgroundRemovedImagePath))" alt="Background Removed Image" class="responsive-image" />
+    </div>
+}
+else
+{
+    <p>No image to display.</p>
+}
+
+<!-- Add CSS for responsiveness -->
+<style>
+    .image-container {
+        text-align: center;
+    }
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+    }
+    h2 {
+        text-align: center;
+    }
+</style>
