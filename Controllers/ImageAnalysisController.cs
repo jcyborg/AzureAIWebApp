@@ -1,21 +1,17 @@
-﻿using Azure.AI.Vision.ImageAnalysis;
-using Azure;
+﻿using Azure;
+using Azure.AI.Vision.ImageAnalysis;
+using ImageAnalyzer.Models;
+using ImageAnalyzer.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Fonts;
-using System.IO;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Color = SixLabors.ImageSharp.Color;
 using PointF = SixLabors.ImageSharp.PointF;
 using RectangleF = SixLabors.ImageSharp.RectangleF;
-using ImageAnalyzer.Models;
-using SixLabors.ImageSharp.PixelFormats;
-using ImageAnalyzer.ViewModel;
 
 public class ImageAnalysisController : Controller
 {
