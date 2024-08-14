@@ -1,92 +1,118 @@
 ﻿@model ImageAnalyzer.Models.ImageModel
 
 @{
-    ViewData["Title"] = "Upload Image";
+    ViewData["Title"] = "Image Analyzer";
 }
 
-<h2>Upload Image</h2>
-
-<form asp-action="Analyze" method="post" enctype="multipart/form-data" class="upload-form">
-    <div class="form-group">
-        <label asp-for="ImageFile" class="control-label"></label>
-        <input asp-for="ImageFile" class="form-control" type="file" />
-        <span asp-validation-for="ImageFile" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="card mx-auto shadow-lg" style="max-width: 600px;">
+        <div class="card-header bg-silver text-dark text-center" style="background: linear-gradient(135deg, #C0C0C0, #DCDCDC); border-bottom: 4px solid #A9A9A9;">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Analyze" method="post" enctype="multipart/form-data" class="upload-form">
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label font-weight-bold">Choose an image file:</label>
+                    <input asp-for="ImageFile" class="form-control" type="file" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+                <div class="form-group d-flex justify-content-between">
+                    <button type="submit" formaction="/ImageAnalysis/Analyze" class="btn btn-silver btn-lg">
+                        <i class="fas fa-image"></i> Analyze Image
+                    </button>
+                    <button type="submit" formaction="/ImageAnalysis/RemoveBackground" class="btn btn-dark btn-lg">
+                        <i class="fas fa-eraser"></i> Remove Background
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group button-group">
-        <button type="submit" formaction="/ImageAnalysis/Analyze" class="btn btn-primary">Analyze Image</button>
-        <button type="submit" formaction="/ImageAnalysis/RemoveBackground" class="btn btn-secondary">Remove Background</button>
-    </div>
-</form>
+</div>
 
-<!-- Add CSS for responsiveness -->
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        padding: 0;
-    }
-    .upload-form {
-        max-width: 600px;
-        margin: 50px auto;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .form-group {
-        margin-bottom: 15px;
-    }
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-    }
-    .btn {
-        flex: 1;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        margin-right: 10px;
-    }
-    .btn:last-child {
-        margin-right: 0;
-    }
-    .btn-primary {
-        background-color: #007bff;
-    }
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-    .btn-secondary {
-        background-color: #6c757d;
-    }
-    .btn-secondary:hover {
-        background-color: #5a6268;
-    }
-   /*  media (max-width: 768px) {
-        .upload-form {
-            padding: 10px;
+<!-- External and Custom CSS -->
+@section Styles {
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
         }
+
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #C0C0C0, #DCDCDC); /* Silver gradient */
+            border-radius: 0;
+            border-bottom: 4px solid #A9A9A9; /* Darker silver */
+        }
+
+            .card-header h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: #000; /* Dark text for contrast */
+            }
+
+        .card-body {
+            background-color: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            box-shadow: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .form-control:focus {
+                border-color: #C0C0C0; /* Silver focus */
+                box-shadow: 0 0 0 0.2rem rgba(192, 192, 192, 0.25);
+            }
+
         .btn {
-            font-size: 14px;
-            margin-bottom: 10px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .button-group {
-            flex-direction: column;
+
+        .btn-silver {
+            background-color: #C0C0C0; /* Silver */
+            border-color: #C0C0C0;
+            color: #000;
         }
-        .btn:last-child {
-            margin-right: 0;
+
+            .btn-silver:hover {
+                background-color: #A9A9A9; /* Darker silver on hover */
+                border-color: #A9A9A9;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .btn-dark {
+            background-color: #6c757d; /* Dark button */
+            border-color: #6c757d;
+            color: #fff;
         }
-    } */
-</style>
+
+            .btn-dark:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .form-group label {
+            font-size: 1rem;
+            color: #333333;
+        }
+
+        .form-group .form-control {
+            padding: 0.5rem 1rem;
+        }
+    </style>
+}

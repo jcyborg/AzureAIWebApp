@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Text to Speech";
+}
+
+<div class="container mt-5">
+    <div class="card mx-auto shadow-lg" style="max-width: 600px;">
+        <div class="card-header text-dark text-center" style="background-color: #C0C0C0;">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body" style="background-color: #E8E8E8;">
+            <form asp-controller="TextToSpeech" asp-action="ConvertTextToSpeech" method="post">
+                <div class="form-group">
+                    <label for="text" class="font-weight-bold">Enter Text:</label>
+                    <textarea id="text" name="text" class="form-control" rows="4" placeholder="Type your text here..." style="background-color: #F5F5F5;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-block text-dark" style="background-color: #A9A9A9;">
+                    <i class="fas fa-microphone"></i> Convert to Speech
+                </button>
+            </form>
+
+            @if (ViewBag.AudioBase64 != null)
+            {
+                <div class="audio-output mt-4 text-center">
+                    <h4>Audio Output:</h4>
+                    <audio controls>
+                        <source src="data:audio/wav;base64,@ViewBag.AudioBase64" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+}

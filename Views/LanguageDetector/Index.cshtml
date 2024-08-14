@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Language Detector";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header text-center text-dark" style="background-color: #C0C0C0;">
+                    <h2 class="mb-0">Language Detector</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="DetectLanguage" method="post">
+                        <div class="form-group">
+                            <label for="userText" class="font-weight-bold">Enter some text:</label>
+                            <input type="text" class="form-control form-control-lg" id="userText" name="userText" placeholder="Type your text here..." />
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-block mt-4" style="background-color: #C0C0C0; color: #000; border: none;">Detect Language</button>
+                    </form>
+
+                    <br />
+                    @if (ViewBag.LanguageResult != null)
+                    {
+                            <div class="mt-4">
+                                <h3 class="text-center text-dark">Detected Language</h3>
+                                    <b><pre class="alert p-3" style="background-color: #E8E8E8; color: #333;">@ViewBag.LanguageResult</pre></b> 
+                            </div>
+                    }
+                    @if (ViewBag.Error != null)
+                    {
+                            <div class="mt-4">
+                                <div class="alert alert-danger">
+                                    <p class="m-0">@ViewBag.Error</p>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+
+            .card {
+                border-radius: 8px;
+            }
+
+            .card-header {
+                border-radius: 8px 8px 0 0;
+                color: #000; /* Ensure text is visible */
+            }
+
+            .form-control-lg {
+                border-radius: 0.3rem;
+            }
+
+            .btn:hover, .btn:focus {
+                background-color: #A9A9A9 !important; /* Darker silver */
+                color: #000 !important;
+            }
+
+            .alert {
+                border-radius: 0.3rem;
+            }
+        </style>
+}
