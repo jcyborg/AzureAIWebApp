@@ -1,0 +1,28 @@
+﻿@model AzureAIWebApp.Models.ChatViewModel
+
+<h2 style="text-align: center; color: #007bff;">Chat with JubrilBot</h2>
+
+<div id="chat-container" style="width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; background-color: #e0f7fa; border-radius: 10px;">
+    <div id="chat-window" style="height: 400px; overflow-y: scroll; background-color: #ffffff; padding: 10px; border: 1px solid #007bff; border-radius: 5px; margin-bottom: 10px;">
+        @foreach (var message in Model.ChatHistory)
+        {
+            @if (message.StartsWith("You:"))
+            {
+                <p style="background-color: #cce5ff; color: #005b9f; padding: 10px; border-radius: 10px; width: fit-content; max-width: 70%; margin-left: auto; text-align: right;">
+                    <strong>You:</strong> @message.Substring(4)
+                </p>
+            }
+            else if (message.StartsWith("JubrilBot:"))
+            {
+                <p style="background-color: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 10px; width: fit-content; max-width: 70%; text-align: left;">
+                    <strong>JubrilBot:</strong> @message.Substring(10)
+                </p>
+            }
+        }
+    </div>
+
+    <form asp-action="Index" method="post" id="chat-form" style="display: flex;">
+        <input type="text" id="UserInput" name="UserInput" value="@Model.UserInput" placeholder="Enter your message" style="width: 85%; padding: 10px; margin-right: 10px; border: 1px solid #005b9f; border-radius: 5px;" />
+        <button type="submit" style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Send</button>
+    </form>
+</div>
